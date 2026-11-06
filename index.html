@@ -14,10 +14,17 @@
 <main>
 <aside>
 <h2>Analysis controls</h2>
-<label>View<select id="mode"><option value="compare">Midtown closure comparison</option><option value="facility">Closest facility</option><option value="coverage">Service area</option></select></label>
+<label>View<select id="mode"><option value="compare">Midtown closure comparison</option><option value="facility">Closest facility</option><option value="coverage">Service area</option><option value="custom">Build a scenario</option></select></label>
 <label>Scenario<select id="scenario"><option value="baseline">Baseline</option><option value="closure">Holman Street closure</option></select></label>
 <label id="incident-control" hidden>Simulated incident<select id="incident"></select></label>
 <label id="cutoff-control" hidden>Drive time cutoff<select id="cutoff"><option>5</option><option>10</option><option>15</option></select></label>
+<div id="custom-controls" hidden>
+<button id="place-incident" aria-pressed="false">Place incident</button>
+<button id="place-destination" aria-pressed="false">Place destination</button>
+<label>Station outage<select id="unavailable"><option value="">All stations available</option></select></label>
+<button id="clear-pins">Clear pins</button>
+<p id="placement-help" class="legend" role="status">Choose a pin, then click inside the dashed boundary.</p>
+</div>
 <div id="results" aria-live="polite">Loading local analysis data…</div>
 <p class="legend">Times are modeled driving estimates. Incidents and the closure are simulated.</p>
 </aside>
@@ -29,6 +36,8 @@
 </main>
 <footer>Road coverage measures reachable centerline length within the pilot boundary. Data from <a href="https://www.gis.hctx.net/arcgis/rest/services/ITC/CTS_roads/MapServer/0">Harris County CTS Roads</a> and <a href="https://www.gis.hctx.net/arcgis/rest/services/Amenities/GHC911_Fire_Stations/MapServer/0">Greater Harris County 9-1-1</a>.</footer>
 <script src="data.js"></script>
+<script src="network.js"></script>
+<script src="scenario.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
