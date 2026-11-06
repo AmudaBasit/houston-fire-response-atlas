@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Houston Fire Response Atlas</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#182b35;background:#eff2ee;--teal:#08776c}
+*{box-sizing:border-box}body{margin:0}header{background:#132c32;color:white;padding:28px max(20px,5vw)}h1{margin:5px 0;font-size:clamp(28px,5vw,48px);letter-spacing:-.045em}header p{margin:6px 0;color:#c8dcd6}.eyebrow{font-size:12px;letter-spacing:.17em;font-weight:750;color:#9ed5c3}main{max-width:1500px;margin:auto;padding:22px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px}aside,section{background:white;border:1px solid #d9e3dc;border-radius:14px;padding:18px}label{display:block;font-weight:650;margin:12px 0}select,button{font:inherit;color:inherit}select{display:block;width:100%;margin-top:5px;padding:8px;background:white;border:1px solid #899d95;border-radius:6px}button{background:#fff;border:1px solid #899d95;border-radius:6px;padding:6px 10px;cursor:pointer}button[aria-pressed="true"]{background:#d6efe7;border-color:var(--teal)}button:focus-visible,select:focus-visible{outline:3px solid #1676a4;outline-offset:2px}#results{border-top:1px solid #dae3dd;padding-top:12px;min-height:105px}#results button{display:block;text-align:left;width:100%;margin:5px 0}#results strong{font-size:1.4em}h2{margin:0;font-size:19px}.map-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}canvas{display:block;width:100%;height:clamp(360px,63vh,750px);background:#f5f4eb;border:1px solid #e2e6db;border-radius:8px;touch-action:none}.legend{font-size:13px;color:#40545b;margin-bottom:0}footer{max-width:1500px;margin:auto;padding:0 22px 22px;font-size:13px;color:#40545b}a{color:#096d64}[hidden]{display:none!important}@media(max-width:750px){main{grid-template-columns:1fr;padding:12px}canvas{height:440px}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">CENTRAL HOUSTON · GIS PLANNING PILOT</div><h1>Fire Response Atlas</h1><p>Explore how a simulated street closure changes routes and reachable roads.</p></header>
+<main>
+<aside>
+<h2>Analysis controls</h2>
+<label>View<select id="mode"><option value="compare">Midtown closure comparison</option><option value="facility">Closest facility</option><option value="coverage">Service area</option></select></label>
+<label>Scenario<select id="scenario"><option value="baseline">Baseline</option><option value="closure">Holman Street closure</option></select></label>
+<label id="incident-control" hidden>Simulated incident<select id="incident"></select></label>
+<label id="cutoff-control" hidden>Drive time cutoff<select id="cutoff"><option>5</option><option>10</option><option>15</option></select></label>
+<div id="results" aria-live="polite">Loading local analysis data…</div>
+<p class="legend">Times are modeled driving estimates. Incidents and the closure are simulated.</p>
+</aside>
+<section aria-labelledby="map-title">
+<div class="map-head"><h2 id="map-title">Midtown route</h2><div><button id="zoom-in" aria-label="Zoom in">+</button> <button id="zoom-out" aria-label="Zoom out">−</button> <button id="reset">Reset view</button></div></div>
+<canvas id="map" role="img" aria-label="Map of modeled fire station routes or reachable road segments"></canvas>
+<p id="legend" class="legend"></p>
+</section>
+</main>
+<footer>Road coverage measures reachable centerline length within the pilot boundary. Data from <a href="https://www.gis.hctx.net/arcgis/rest/services/ITC/CTS_roads/MapServer/0">Harris County CTS Roads</a> and <a href="https://www.gis.hctx.net/arcgis/rest/services/Amenities/GHC911_Fire_Stations/MapServer/0">Greater Harris County 9-1-1</a>.</footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
